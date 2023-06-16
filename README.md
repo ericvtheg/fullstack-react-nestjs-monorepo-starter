@@ -1,9 +1,19 @@
 # Full Stack Client + Server Template
 
+Simple full stack monorepo application.
 
 ## Tech
-* Typescript (of course)
+
+### Client (Frontend)
 * React
-* vite
-* tailwindcss
-* nestjs
+* Vite
+* Tailwind CSS
+
+### Backend 
+* Nestjs
+* Docker (easy containerization)
+
+
+## TODO
+* Prisma + Postgres
+* Terraform (client and server)
