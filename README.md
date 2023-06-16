@@ -9,7 +9,7 @@ Simple full stack monorepo application.
 * Vite
 * Tailwind CSS
 
-### Backend 
+### Server (Backend) 
 * Nestjs
 * Docker (easy containerization)
 
