@@ -13,7 +13,7 @@ terraform {
     region                  = "us-east-2"
     profile                 = "default"
     encrypt                 = "true"
-    dynamodb_table          = "template-frontend-terraform-lock"
+    dynamodb_table          = "<TO_BE_REPLACED_DDB_TABLE_NAME>"
     shared_credentials_file = "$HOME/.aws/credentials"
   }
 }

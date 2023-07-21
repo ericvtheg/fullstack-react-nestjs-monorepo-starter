@@ -107,11 +107,18 @@ yargsInteractive()
     console.log("Creating S3 client state bucket...");
     await createS3Bucket(service, region);
 
-    console.log("Updating providers.tf with new client state bucket name...");
+    console.log(
+      "Updating providers.tf with new client state bucket name and DynamoDB table..."
+    );
     await updateFileContents(
       "./client/terraform/providers.tf",
       "<TO_BE_REPLACED_STATE_BUCKET_NAME>",
       buildBucketName(service)
+    );
+    await updateFileContents(
+      "./client/terraform/providers.tf",
+      "<TO_BE_REPLACED_DDB_TABLE_NAME>",
+      `${service}-client-terraform-state-lock-table`
     );
 
     console.log("Updating terraform.tfvars with correct variable values");
