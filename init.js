@@ -21,7 +21,7 @@ const options = {
   },
   deploy: {
     type: "confirm",
-    describe: "The infrastructure for your client will be deployed. Confirm?",
+    describe: "An s3 bucket used by terraform will be deployed. Confirm?",
   },
 };
 
@@ -74,7 +74,7 @@ const createS3Bucket = async (service, region) => {
 const terraformInit = async () => {
   try {
     const { stdout, stderr } = await exec(
-      "cd ./client/deploy && terraform init"
+      "cd ./client/terraform && terraform init"
     );
     console.log(stdout);
     console.log(stderr);
@@ -106,12 +106,12 @@ yargsInteractive()
       return;
     }
 
-    console.log("Creating S3 state bucket...");
+    console.log("Creating S3 client state bucket...");
     await createS3Bucket(service, region);
 
-    console.log("Updating providers.tf with new state bucket name...");
+    console.log("Updating providers.tf with new client state bucket name...");
     await updateFileContents(
-      "./client/deploy/providers.tf",
+      "./client/terraform/providers.tf",
       "<TO_BE_REPLACED_STATE_BUCKET_NAME>",
       buildBucketName(service)
     );

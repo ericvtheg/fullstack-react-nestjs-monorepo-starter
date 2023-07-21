@@ -22,4 +22,4 @@ Simple full stack monorepo application.
 
 ## Steps
 * [install terraform cli](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-* configure aws account credentials (make sure the account has admin permissions)
+* configure aws account credentials (make sure the account has necessary permissions)
