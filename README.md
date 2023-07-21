@@ -2,6 +2,9 @@
 
 Simple full stack monorepo application.
 
+## Dependencies
+* Node.js
+
 ## Tech
 
 ### Client (Frontend)
@@ -15,5 +18,8 @@ Simple full stack monorepo application.
 
 
 ## TODO
-* Prisma + Postgres
-* Terraform (client and server)
+* Terraform infrastructure + deploys (client and server)
+
+## Steps
+* [install terraform cli](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+* configure aws account credentials (make sure the account has admin permissions)
