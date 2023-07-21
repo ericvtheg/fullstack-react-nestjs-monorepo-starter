@@ -116,17 +116,17 @@ yargsInteractive()
 
     console.log("Updating terraform.tfvars with correct variable values");
     await updateFileContents(
-      "./client/terraform/variables.tf",
+      "./client/terraform/terraform.tfvars",
       "<TO_BE_REPLACED_SERVICE_VAR>",
       service
     );
     await updateFileContents(
-      "./client/terraform/variables.tf",
+      "./client/terraform/terraform.tfvars",
       "<TO_BE_REPLACED_AWS_REGION_VAR>",
       region
     );
     await updateFileContents(
-      "./client/terraform/variables.tf",
+      "./client/terraform/terraform.tfvars",
       "<TO_BE_REPLACED_DOMAIN_NAME_VAR>",
       domain_name
     );
