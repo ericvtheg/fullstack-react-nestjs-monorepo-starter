@@ -18,7 +18,8 @@ const options = {
   },
   deploy: {
     type: "confirm",
-    describe: "An s3 bucket used by terraform will be deployed. Confirm?",
+    describe:
+      "An s3 bucket used to save terraform state will be created. Confirm?",
   },
 };
 
