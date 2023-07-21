@@ -1,0 +1,3 @@
+service     = "<TO_BE_REPLACED_SERVICE_VAR>"
+aws_region  = "<TO_BE_REPLACED_AWS_REGION_VAR>"
+domain_name = "<TO_BE_REPLACED_DOMAIN_NAME_VAR>"

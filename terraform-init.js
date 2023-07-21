@@ -6,17 +6,15 @@ const exec = util.promisify(require("child_process").exec);
 const options = {
   interactive: { default: true },
   service: { type: "input", describe: "Enter the name of your service" },
-  env: {
-    type: "input",
-    default: "prod",
-    describe: "Enter the name of your environment",
-    prompt: "always",
-  },
   region: {
     type: "input",
     default: "us-east-2",
     describe: "Enter the name of your preferred region",
     prompt: "always",
+  },
+  domain_name: {
+    type: "input",
+    describe: "What is the domain name you own and will use for your web app?",
   },
   deploy: {
     type: "confirm",
@@ -93,7 +91,7 @@ yargsInteractive()
   .usage("$0 <command>")
   .interactive(options)
   .then(async (result) => {
-    const { service, region } = result;
+    const { service, region, domain_name } = result;
 
     if (service.includes(" ")) {
       console.error("Error: service name cannot contain spaces");
@@ -113,6 +111,23 @@ yargsInteractive()
       "./client/terraform/providers.tf",
       "<TO_BE_REPLACED_STATE_BUCKET_NAME>",
       buildBucketName(service)
+    );
+
+    console.log("Updating terraform.tfvars with correct variable values");
+    await updateFileContents(
+      "./client/terraform/variables.tf",
+      "<TO_BE_REPLACED_SERVICE_VAR>",
+      service
+    );
+    await updateFileContents(
+      "./client/terraform/variables.tf",
+      "<TO_BE_REPLACED_AWS_REGION_VAR>",
+      region
+    );
+    await updateFileContents(
+      "./client/terraform/variables.tf",
+      "<TO_BE_REPLACED_DOMAIN_NAME_VAR>",
+      domain_name
     );
 
     console.log("Running terraform init for client...");
