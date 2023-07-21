@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "init": "node init.js"
+    "init": "node init-terraform.js"
   },
   "dependencies": {
     "yargs": "^17.7.2",
