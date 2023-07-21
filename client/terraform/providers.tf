@@ -8,7 +8,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket                  = "asdfz-client-terraform-state-bucket"
+    bucket                  = "<TO_BE_REPLACED_STATE_BUCKET_NAME>"
     key                     = "tfstate"
     region                  = "us-east-2"
     profile                 = "default"
