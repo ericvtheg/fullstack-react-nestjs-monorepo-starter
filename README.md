@@ -1,6 +1,8 @@
-# Full Stack Client + Server Template
+# Full Stack Client + Server Template (WIP)
 
 Simple full stack monorepo application.
+
+CURRENTLY NOT READY FOR USE.
 
 ## Dependencies
 * Node.js
@@ -17,7 +19,7 @@ Simple full stack monorepo application.
 * Docker (easy containerization)
 
 
-## TODO
+## TODO/WIP
 * Terraform infrastructure + deploys (client and server)
 
 ## Steps
