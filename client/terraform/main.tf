@@ -24,8 +24,8 @@ resource "aws_s3_bucket_policy" "client-bucket-policy" {
 
 # Website config that specifies the index and error documents
 # If using a SPA framework, you'll want to set the error document to index.html
-resource "aws_s3_bucket_website_configuration" "beta-test-songs-frontend-hosting" {
-  bucket = aws_s3_bucket.beta-test-songs-frontend-bucket.id
+resource "aws_s3_bucket_website_configuration" "client-bucket-config" {
+  bucket = aws_s3_bucket.client-bucket.id
 
   index_document {
     suffix = "index.html"

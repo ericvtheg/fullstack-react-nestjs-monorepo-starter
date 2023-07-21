@@ -19,7 +19,7 @@ const options = {
   deploy: {
     type: "confirm",
     describe:
-      "An s3 bucket used to save terraform state will be created. Confirm?",
+      "An s3 bucket and DynamoDB table used to save terraform state will be created. Confirm?",
   },
 };
 
@@ -49,9 +49,10 @@ const AWS_REGIONS = [
   "sa-east-1",
 ];
 
-const buildBucketName = (service) => {
-  return `${service}-client-terraform-state-bucket`;
-};
+const buildBucketName = (service) => `${service}-client-terraform-state-bucket`;
+
+const buildTableName = (service) =>
+  `${service}-client-terraform-state-lock-table`;
 
 const createS3Bucket = async (service, region) => {
   try {
@@ -61,6 +62,23 @@ const createS3Bucket = async (service, region) => {
       )}" --region ${region} \
         --create-bucket-configuration LocationConstraint="${region}"`
     );
+    console.log(stdout);
+    console.log(stderr);
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
+const createDynamoDbTable = async (service, region) => {
+  try {
+    const { stdout, stderr } = await exec(`
+      aws dynamodb create-table \
+        --region ${region} \
+        --table-name ${buildTableName(service)} \
+        --attribute-definitions AttributeName=LockID,AttributeType=S \
+        --key-schema AttributeName=LockID,KeyType=HASH \
+        --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1`);
     console.log(stdout);
     console.log(stderr);
   } catch (e) {
@@ -118,7 +136,7 @@ yargsInteractive()
     await updateFileContents(
       "./client/terraform/providers.tf",
       "<TO_BE_REPLACED_DDB_TABLE_NAME>",
-      `${service}-client-terraform-state-lock-table`
+      buildTableName(service)
     );
 
     console.log("Updating terraform.tfvars with correct variable values");
@@ -137,6 +155,9 @@ yargsInteractive()
       "<TO_BE_REPLACED_DOMAIN_NAME_VAR>",
       domain_name
     );
+
+    console.log("Create DynamoDB table for client");
+    await createDynamoDbTable(service, region);
 
     console.log("Running terraform init for client...");
     await terraformInit();
