@@ -1,10 +1,10 @@
 {
   "name": "server",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "version": "0.0.0",
+  "description": "The backend server for the app",
+  "author": "Eric Ventor",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
