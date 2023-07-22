@@ -139,7 +139,7 @@ yargsInteractive()
       buildTableName(service)
     );
 
-    console.log("Updating terraform.tfvars with correct variable values");
+    console.log("Updating terraform.tfvars with correct variable values...");
     await updateFileContents(
       "./client/terraform/terraform.tfvars",
       "<TO_BE_REPLACED_SERVICE_VAR>",
@@ -156,7 +156,7 @@ yargsInteractive()
       domain_name
     );
 
-    console.log("Create DynamoDB table for client");
+    console.log("Create DynamoDB table for client...");
     await createDynamoDbTable(service, region);
 
     console.log("Running terraform init for client...");
