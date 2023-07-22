@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react-swc'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // this proxies requests from the client to the server for local development
+  // this proxies requests from the client to the server during local development
   server: {
     proxy: {
       '/api': {
