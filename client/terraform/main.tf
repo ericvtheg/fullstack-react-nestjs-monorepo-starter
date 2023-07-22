@@ -3,6 +3,16 @@ resource "aws_s3_bucket" "client-bucket" {
   bucket = var.domain_name
 }
 
+# Uploads all files in the dist directory to the bucket that matches the listed file extensions
+resource "aws_s3_object" "beta-test-songs-frontend-bucket-files" {
+  for_each     = fileset("${path.module}/..", "dist/**/*.{html,css,js,png,jpg,jpeg,ico,webmanifest}") #can include images here
+  bucket       = aws_s3_bucket.client-bucket.id
+  key          = replace(each.value, "/^dist//", "")
+  source       = "../${each.value}"
+  content_type = lookup(local.content_types, regex("\\.[^.]+$", each.value), null)
+  etag         = filemd5("../${each.value}")
+}
+
 resource "aws_s3_bucket_ownership_controls" "client-bucket-ownership-controls" {
   bucket = aws_s3_bucket.client-bucket.id
   rule {
